@@ -328,12 +328,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/phpDocumentor/TypeResolver.git",
-                "reference": "7462d5f123dfc080dfdf26897032a6513644fc95"
+                "reference": "aa06ba38ed9e5133feb70ea95b42a2e5354f52b8"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/phpDocumentor/TypeResolver/zipball/7462d5f123dfc080dfdf26897032a6513644fc95",
-                "reference": "7462d5f123dfc080dfdf26897032a6513644fc95",
+                "url": "https://api.github.com/repos/phpDocumentor/TypeResolver/zipball/aa06ba38ed9e5133feb70ea95b42a2e5354f52b8",
+                "reference": "aa06ba38ed9e5133feb70ea95b42a2e5354f52b8",
                 "shasum": ""
             },
             "require": {
@@ -366,7 +366,7 @@
                 }
             ],
             "description": "A PSR-5 based resolver of Class names, Types and Structural Element Names",
-            "time": "2020-02-18T18:59:58+00:00"
+            "time": "2020-03-01T10:45:06+00:00"
         },
         {
             "name": "phpspec/prophecy",
@@ -751,12 +751,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/sebastianbergmann/phpunit.git",
-                "reference": "46054e5e7ec98ee63581811b3c1529167453864e"
+                "reference": "0cf63a357c218247e5c9549c49110c6595be108e"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/sebastianbergmann/phpunit/zipball/46054e5e7ec98ee63581811b3c1529167453864e",
-                "reference": "46054e5e7ec98ee63581811b3c1529167453864e",
+                "url": "https://api.github.com/repos/sebastianbergmann/phpunit/zipball/0cf63a357c218247e5c9549c49110c6595be108e",
+                "reference": "0cf63a357c218247e5c9549c49110c6595be108e",
                 "shasum": ""
             },
             "require": {
@@ -777,6 +777,7 @@
                 "phpunit/php-invoker": "^3.0",
                 "phpunit/php-text-template": "^2.0",
                 "phpunit/php-timer": "^3.0",
+                "sebastian/code-unit": "^1.0",
                 "sebastian/comparator": "^4.0",
                 "sebastian/diff": "^4.0",
                 "sebastian/environment": "^5.0.1",
@@ -829,7 +830,53 @@
                 "testing",
                 "xunit"
             ],
-            "time": "2020-02-22T07:06:00+00:00"
+            "time": "2020-03-01T19:48:02+00:00"
+        },
+        {
+            "name": "sebastian/code-unit",
+            "version": "dev-master",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/sebastianbergmann/code-unit.git",
+                "reference": "5ca5a3ab1f7c63fd1789a89fa4973d49a68d2252"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/sebastianbergmann/code-unit/zipball/5ca5a3ab1f7c63fd1789a89fa4973d49a68d2252",
+                "reference": "5ca5a3ab1f7c63fd1789a89fa4973d49a68d2252",
+                "shasum": ""
+            },
+            "require": {
+                "php": "^7.3"
+            },
+            "require-dev": {
+                "phpunit/phpunit": "^9.0"
+            },
+            "type": "library",
+            "extra": {
+                "branch-alias": {
+                    "dev-master": "1.0-dev"
+                }
+            },
+            "autoload": {
+                "classmap": [
+                    "src/"
+                ]
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "BSD-3-Clause"
+            ],
+            "authors": [
+                {
+                    "name": "Sebastian Bergmann",
+                    "email": "sebastian@phpunit.de",
+                    "role": "lead"
+                }
+            ],
+            "description": "Collection of value objects that represent the PHP code units",
+            "homepage": "https://github.com/sebastianbergmann/code-unit",
+            "time": "2020-03-01T20:01:38+00:00"
         },
         {
             "name": "sebastian/code-unit-reverse-lookup",
