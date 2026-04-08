@@ -15,9 +15,13 @@
     "phpunit/phpunit": "^9.0"
   },
   "autoload": {
-    "classmap": [
-      "src/",
-      "tests/"
-    ]
+    "psr-4": {
+      "App\\": "src/"
+    }
+  },
+  "autoload-dev": {
+    "psr-4": {
+      "Tests\\": "tests/"
+    }
   }
 }

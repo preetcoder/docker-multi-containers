@@ -1,20 +1,65 @@
-# CBC Programming Test
+# SRL Dockerised Order Form
 
-This is a simple test to verify your familiarity with PHP and it's usage, it should take you a couple of hours.
+SRL is a small pet project built to test a Dockerised environment with multiple containers. It uses one container for the PHP application and another for the MySQL database, then saves order form submissions into the database.
 
-This is the beginnings of a simple application that contains an invoice class with some associated unit tests.
+## Project Overview
 
-## Tasks
+This project demonstrates how a simple PHP app can run in a containerised setup while persisting data in a separate MySQL container. The app presents an order form, collects customer and order details, and stores the submitted data in MySQL.
 
-1. Add a composer.json file - Finished
-2. Add "autoload" definitions for the two classes -- Finished. Used classmap for autoload in composer. We could use psr-4
-3. Add PHPUnit as a development dependency - Finished
-4. Write documentation for all properties and methods in the `Invoice` class - Finished
-5. Update one of the tests so it isn't "tricked" by the sample `getTotals()` implementation -- Finished
-6. Complete the implementation of the `getTotals()` method so that taxes are calculated correctly -- Finished
-7. Fix any bugs the PHPUnit tests reveal -- Finished
-8. Add at least one test that verifies the behaviour of tax-free items -- Finished
-9. Implement retrieval of invoice items, with calculated tax amounts, and add a test to verify this behaviour -- Finished
-10. Complete the "index.php" file so that it outputs a HTML table using the invoice instance at the top of the file -- Finished
+## Features
 
-Once you're done, create a zip file of the entire directory, including the .git directory and composer files, then send it back to us.
+- PHP-based web application.
+- Separate MySQL container for data storage.
+- Order form to collect customer details.
+- Saves submitted form data into MySQL.
+- Good starting point for testing Docker networking, persistence, and service separation.
+
+## Tech Stack
+
+- PHP
+- MySQL
+- Docker
+- Docker Compose
+
+## How It Works
+
+1. The user opens the order form in the PHP container.
+2. The form collects customer and order information.
+3. On submit, the PHP app sends the data to the MySQL container.
+4. The database stores the submitted record for later use.
+
+## Container Setup
+
+The project uses two containers:
+
+- `app`: runs the main PHP application.
+- `db`: runs the MySQL server and stores the form data.
+
+These containers communicate over a shared Docker network, allowing the PHP app to connect to MySQL using the database service name.
+
+## Purpose of the Project
+
+This project is mainly for learning and testing Kubernetes deployment which will be done in next step:
+
+- Docker container communication.
+- Multi-container application setup.
+- PHP and MySQL integration.
+- Form handling and database persistence.
+- Basic project structure for future expansion.
+
+## Running the Project
+
+1. Build the containers.
+2. Start the services with Docker Compose.
+3. Open the app in a browser.
+4. Fill in the order form and submit it.
+5. Check the MySQL database to confirm the data was saved.
+
+## Future Improvements
+
+- Add form validation.
+- Add edit and delete actions.
+- Show saved orders on a dashboard.
+- Add logging and error handling.
+- Use environment variables for all database settings.
+- Use Kubernetes to Orchestrate containers
