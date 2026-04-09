@@ -1,8 +1,8 @@
 <?php
-$host = 'db'; // service name from docker compose
-$dbname = 'mobile';
-$username = 'root';
-$password = 'secret';
+$host = !empty($_ENV['MYSQL_HOST']) ? $_ENV['MYSQL_HOST'] : 'db'; // service name from docker compose
+$dbname = !empty($_ENV['MYSQL_DB']) ? $_ENV['MYSQL_DB'] : 'mobile';
+$username = !empty($_ENV['MYSQL_USER']) ? $_ENV['MYSQL_USER'] : 'root';
+$password = !empty($_ENV['MYSQL_PASSWORD']) ? $_ENV['MYSQL_PASSWORD'] : 'secret';
 
 try {
     $pdo = new PDO(
