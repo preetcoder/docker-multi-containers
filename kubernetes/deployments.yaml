@@ -17,7 +17,7 @@ spec:
       containers:
         # main app
       - name: php-app-container
-        image: codepreet/docker_php_multi_containers:02
+        image: codepreet/docker_php_multi_containers:03
         env:
           - name: MYSQL_HOST
             value: 127.0.0.1
