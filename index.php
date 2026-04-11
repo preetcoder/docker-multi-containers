@@ -43,7 +43,6 @@ $pdo->exec("
     )
 ");
 
-
 if($_REQUEST["submitBtn"] == 1) {
     $customer = new Customer();
     
@@ -97,6 +96,13 @@ if($_REQUEST["submitBtn"] == 1) {
     }
 
 }
+
+
+$stmt = $pdo->prepare("
+            select o.name, o.price, c.customer_name from orders o join customer c on c.id = o.customer_id
+        ");
+$stmt->execute();
+
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -228,6 +234,16 @@ if($_REQUEST["submitBtn"] == 1) {
     <?php if ($message): ?>
         <p><?php echo htmlspecialchars($message); ?></p>
     <?php endif ?>
+    <h2>List Orders</h2>
+    <div>
+      <ul>
+        <?php
+          foreach ($stmt->fetchAll() as $order) {
+            echo "<li>{$order['name']} - ({$order['customer_name']})</li>";
+          }
+        ?>
+      </ul>
+    </div>
     <h2>Create Order</h2>
 
     <form id="orderForm" method="post">
