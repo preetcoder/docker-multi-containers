@@ -15,28 +15,11 @@ spec:
         app: php-app
     spec:
       containers:
-        # main app
       - name: php-app-container
         image: codepreet/docker_php_multi_containers:03
-        env:
-          - name: MYSQL_HOST
-            value: mysql-service
-          - name: MYSQL_USER
-            value: root
-          - name: MYSQL_PASSWORD
-            value: secret
-          - name: MYSQL_DB
-            value: mobile
+        envFrom:
+          - configMapRef:
+              name: php-app-config
         ports:
         - containerPort: 80
           name: php-app-port
-
-      #   #db persistance
-      # - name: db
-      #   image: mysql:8.0
-      #   env:
-      #     - name: MYSQL_ROOT_PASSWORD
-      #       value: secret
-      #     - name: MYSQL_DATABASE
-      #       value: mobile
-
