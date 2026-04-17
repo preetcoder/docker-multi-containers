@@ -20,7 +20,7 @@ spec:
         image: codepreet/docker_php_multi_containers:03
         env:
           - name: MYSQL_HOST
-            value: 127.0.0.1
+            value: mysql-service
           - name: MYSQL_USER
             value: root
           - name: MYSQL_PASSWORD
@@ -29,12 +29,14 @@ spec:
             value: mobile
         ports:
         - containerPort: 80
+          name: php-app-port
 
-        #db persistance
-      - name: db
-        image: mysql:8.0
-        env:
-          - name: MYSQL_ROOT_PASSWORD
-            value: secret
-          - name: MYSQL_DATABASE
-            value: mobile
+      #   #db persistance
+      # - name: db
+      #   image: mysql:8.0
+      #   env:
+      #     - name: MYSQL_ROOT_PASSWORD
+      #       value: secret
+      #     - name: MYSQL_DATABASE
+      #       value: mobile
+
