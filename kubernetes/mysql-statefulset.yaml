@@ -32,9 +32,9 @@ spec:
         env:
           - name: MYSQL_ROOT_PASSWORD
             valueFrom:
-              configMapKeyRef:
-                name: php-app-config
-                key: MYSQL_ROOT_PASSWORD
+              secretKeyRef:
+                name: php-app-secret
+                key: MYSQL_PASSWORD
           - name: MYSQL_DATABASE
             valueFrom:
               configMapKeyRef:
