@@ -6,9 +6,8 @@ spec:
   selector:
     app: php-app
   ports:
-      - name: http
+      - name: php-app-port
         port: 8500
-        # targetPort: 80
-        targetPort: php-app-port
+        targetPort: 80
   type: ClusterIP
   
