@@ -1,8 +1,0 @@
-apiVersion: v1
-kind: ConfigMap
-metadata:
-  name: php-app-config
-data:
-  MYSQL_HOST: mysql-service
-  MYSQL_USER: root
-  MYSQL_DB: mobile
