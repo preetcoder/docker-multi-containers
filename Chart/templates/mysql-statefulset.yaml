@@ -1,0 +1,46 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: {{ .Values.appStateFullSet.serviceName }}
+spec:
+  clusterIP: None
+  selector:
+    app: {{ .Values.appStateFullSet.labelname }}
+  ports:
+  - port: {{ .Values.appStateFullSet.servicePort}}
+--- 
+apiVersion: apps/v1
+kind: StatefulSet
+metadata:
+  name: {{ .Values.appStateFullSet.name }}
+spec:
+  persistentVolumeClaimRetentionPolicy:
+    whenDeleted: Delete
+  selector:
+    matchLabels:
+      app: {{ .Values.appStateFullSet.labelname }}
+  serviceName: {{ .Values.appStateFullSet.serviceName }}
+  replicas: 1
+  template:
+    metadata:
+      labels:
+        app: {{ .Values.appStateFullSet.labelname }}
+    spec:
+      containers:
+      - name: {{ .Values.appStateFullSet.containerName }}
+        image: "{{.Values.appStateFullSet.image}}:{{ .Values.appStateFullSet.imagTag }}"
+        env:
+          {{-  toYaml .Values.appStateFullSet.envVars  | nindent 10 }}
+        ports:
+        - containerPort: {{ .Values.appStateFullSet.servicePort}}
+        volumeMounts:
+        - name: {{ .Values.appStateFullSet.volumeName }}
+          mountPath: {{ .Values.appStateFullSet.volumeMountPath }}
+  volumeClaimTemplates:
+  - metadata:
+      name: {{ .Values.appStateFullSet.volumeName }}
+    spec:
+      accessModes: [ "ReadWriteOnce" ]
+      resources:
+        requests:
+          storage: 1Gi
