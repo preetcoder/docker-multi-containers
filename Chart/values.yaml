@@ -1,0 +1,67 @@
+name: "php-app"
+
+appDeployment:
+  replicas: 2
+  image: "codepreet/docker_php_multi_containers"
+  imageTag: "03"
+  pullPolicy: IfNotPresent
+
+
+appService:
+  name: php-app-service
+  targetPort: 80
+  port: 8500
+  serviceType: ClusterIP
+  portName: php-app-port
+
+appSecret:
+  type: Opaque
+  values:
+    - key: MYSQL_PASSWORD
+      value: secret
+    - key: TEST
+      value: testsecret
+
+appConfigMaps:
+  - key: MYSQL_HOST
+    value: mysql-service
+  - key: MYSQL_USER
+    value: root
+  - key : MYSQL_DB
+    value: mobile
+
+# This block is for setting up the ingress for more information can be found here: https://kubernetes.io/docs/concepts/services-networking/ingress/
+ingress:
+  enabled: true
+  className: ""
+  annotations: {}
+    # kubernetes.io/ingress.class: nginx
+    # kubernetes.io/tls-acme: "true"
+  hosts:
+    - host: localk8slab.com #add this to /etc/hosts file or use valid domain
+      paths:
+        - path: /
+          pathType: Prefix
+  tls: []
+
+appStateFullSet:
+  name: mysql-statefulset
+  labelname: mysql-app
+  serviceName: mysql-service # make sure you update config map also when updating this
+  servicePort: 3306
+  containerName: db
+  image: mysql
+  imagTag: "8.0"
+  volumeMountPath: "/var/lib/mysql"
+  volumeName: "mysql-storage"
+  envVars:
+    - name: MYSQL_ROOT_PASSWORD
+      valueFrom:
+        secretKeyRef:
+          name: php-app-secret
+          key: MYSQL_PASSWORD
+    - name: MYSQL_DATABASE
+      valueFrom:
+        configMapKeyRef:
+          name: php-app-config
+          key: MYSQL_DB

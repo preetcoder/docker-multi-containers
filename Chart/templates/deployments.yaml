@@ -1,0 +1,33 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: {{ .Values.name }}-deployment
+  labels:
+    app: {{ .Values.name }}
+spec:
+  replicas: {{ .Values.appDeployment.replicas }}
+  selector:
+    matchLabels:
+      app: {{ .Values.name }}
+  template:
+    metadata:
+      labels:
+        app: {{ .Values.name }}
+    spec:
+      containers:
+      - name: {{ .Values.name }}-container
+        image: "{{ .Values.appDeployment.image }}:{{ .Values.appDeployment.imageTag | default .Chart.AppVersion }}"
+        imagePullPolicy: {{ .Values.appDeployment.pullPolicy }}
+        resources:
+          limits:
+            cpu: "250m"
+            memory: "128Mi"
+          requests:
+            cpu: "100m"
+            memory: "64Mi"
+        envFrom:
+          - configMapRef:
+              name: {{ .Values.name }}-config
+        ports:
+        - containerPort: {{ .Values.appService.targetPort}}
+          name: {{ .Values.appService.portName }}
